@@ -22,15 +22,17 @@ export default function TodoItem({ item, type, mode = "actif", progress, aDesEnf
     </Pressable>
   ); //si le parent est verouillé on bloque le toggle sinon on apelle la function onToggle, et ça met lemoji 
 
-  return (
-    <Swipeable
-      renderRightActions={() => (
-        <Pressable onPress={() => onDelete(item.id)} style={styles.swipeDelete}> 
-          <Text style={styles.swipeDeleteText}>Supprimer</Text>
-        </Pressable> //renderRightActions affiche le bouton supprimer quand on swipe 
-      )} 
-      overshootRight={false}
-    >
+    // renderRightActions affiche le bouton supprimer quand on swipe
+    return (
+      <Swipeable
+        renderRightActions={() => (
+          <Pressable onPress={() => onDelete(item.id)} style={styles.swipeDelete}>
+            <Text style={styles.swipeDeleteText}>Supprimer</Text>
+          </Pressable>
+        )}
+        overshootRight={false}
+      >
+
       <View style={[styles.row, estParent ? styles.parentRow : styles.childRow]}>
         <View style={styles.left}>
           <Pressable onLongPress={() => peutEdit && onEdit(item)} delayLongPress={220}> 
@@ -66,8 +68,9 @@ export default function TodoItem({ item, type, mode = "actif", progress, aDesEnf
         </View> 
       </View>
     </Swipeable>
-  ); {/* Montre le bouton + que si c'est un parent et qu'il est en mode actif pour eviter d'ajouter un enfant a un enfant ou dans la modale des objectif terminé*/}
+  ); 
 }
+// Montre le bouton + que si c'est un parent et qu'il est en mode actif pour eviter d'ajouter un enfant a un enfant ou dans la modale des objectif terminé
 
 const styles = StyleSheet.create({
   row: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 12, paddingVertical: 14, paddingHorizontal: 14, borderRadius: 16, backgroundColor: "rgba(255,255,255,0.78)", borderWidth: 1, borderColor: "rgba(0,0,0,0.08)" },

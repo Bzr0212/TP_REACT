@@ -38,7 +38,8 @@ export default function TodoList() {
 
   const confirmerAjoutEnfant = () => {
     if (draftParentId == null) return;
-    ajouterSousObjectif(draftParentId, texteEnfant);
+    if (!texteEnfant.trim()) return;
+   ajouterSousObjectif(draftParentId, texteEnfant.trim());
     setTexteEnfant("");
     setDraftParentId(null);
   }; //appel la fonction 'ajouterSousObjectif' et reset le draft
@@ -48,10 +49,11 @@ export default function TodoList() {
     setDraftParentId(null);
   }; //reset simple
 
-  const ajouter = () => {
-    ajouterObjectif(texte);
-    setTexte("");
-  }; //envoie au hook et vide l'input
+ const ajouter = () => {
+  if (!texte.trim()) return;
+  ajouterObjectif(texte);
+  setTexte("");
+}; //envoie au hook et vide l'input
 
   return (
     <View style={styles.wrapper}>
